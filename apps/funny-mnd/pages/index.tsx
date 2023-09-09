@@ -1,5 +1,5 @@
+import Button from "@/components/Button";
 import Head from "next/head";
-import { Button } from "ui";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Button />
+        <Button theme="w-full primary">Primary</Button>
       </main>
     </>
   );
