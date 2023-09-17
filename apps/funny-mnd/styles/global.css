@@ -1,0 +1,16 @@
+html,
+body {
+  margin: 0;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-block;
+}
+
+p {
+  margin: 0;
+}

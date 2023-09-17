@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "jsx": "preserve",
+    "esModuleInterop": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
+  "exclude": ["node_modules"]
+}
