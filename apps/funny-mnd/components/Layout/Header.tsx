@@ -9,7 +9,9 @@ const Header: React.FC = () => {
   return (
     <header className={headerStyle}>
       <button onClick={goHome} type="button">
-        <Typography className={typographyStyle.xlarge900}>국락부</Typography>
+        <Typography as="p" className={typographyStyle.xlarge900}>
+          국락부
+        </Typography>
       </button>
     </header>
   );
