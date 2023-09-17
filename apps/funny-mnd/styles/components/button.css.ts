@@ -100,9 +100,9 @@ const basic = {
 
 export const buttonStyle = styleVariants({
   ...basic,
-  "w-full primary": [...basic.primary, fullWidthStyle],
-  "w-full blue": [...basic.blue, fullWidthStyle],
-  "w-full gray": [...basic.gray, fullWidthStyle],
-  "w-full red": [...basic.red, fullWidthStyle],
-  "w-full yellow": [...basic.yellow, fullWidthStyle],
+  "widthFull primary": [...basic.primary, fullWidthStyle],
+  "widthFull blue": [...basic.blue, fullWidthStyle],
+  "widthFull gray": [...basic.gray, fullWidthStyle],
+  "widthFull red": [...basic.red, fullWidthStyle],
+  "widthFull yellow": [...basic.yellow, fullWidthStyle],
 });

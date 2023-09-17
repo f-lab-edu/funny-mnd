@@ -4,6 +4,7 @@ import type {
   ElementType,
   PropsWithChildren,
 } from "react";
+import { typographyStyle } from "@/styles/components/typography.css";
 
 export type Combine<T, K> = T & Omit<K, keyof T>;
 
@@ -14,19 +15,21 @@ export type CombineElementProps<T extends ElementType, K = unknown> = Combine<
 
 type OverridableProps<T extends ElementType, K = unknown> = {
   as?: T;
+  theme?: string;
 } & CombineElementProps<T, K>;
 
 type TextProps<T extends ElementType> = PropsWithChildren<OverridableProps<T>>;
 
 function Typography<T extends ElementType = "span">(
-  { children, as, ...props }: TextProps<T>,
+  { children, as, theme, ...props }: TextProps<T>,
   ref: React.Ref<never>
 ) {
   const target = as ?? "span";
   const Component = target;
+  const themeName = theme ? typographyStyle[theme] : "";
 
   return (
-    <Component ref={ref} {...props}>
+    <Component className={themeName} ref={ref} {...props}>
       {children}
     </Component>
   );
