@@ -80,7 +80,7 @@ export const bgYellowButtonStyle = style([
     ":hover": {
       backgroundColor: colors.yellow[300],
     },
-     ":active": {
+    ":active": {
       backgroundColor: colors.yellow[500],
     },
   },

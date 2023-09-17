@@ -1,12 +1,17 @@
+import type { PropsWithChildren } from "react/index.js";
 import { buttonStyle } from "@/styles/components/button.css";
-import { PropsWithChildren } from "react";
 
 interface ButtonParam extends PropsWithChildren {
   theme: keyof typeof buttonStyle;
 }
 
 const Button: React.FC<ButtonParam> = ({ children, theme }) => {
-  return <button className={buttonStyle[theme]}>{children}</button>;
+  const className = buttonStyle[theme];
+  return (
+    <button className={className} type="button">
+      {children}
+    </button>
+  );
 };
 
 export default Button;

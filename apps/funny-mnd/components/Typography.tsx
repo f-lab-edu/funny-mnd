@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react/index.js";
 
 interface TypographyParam
   extends PropsWithChildren,

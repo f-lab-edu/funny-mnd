@@ -17,7 +17,6 @@ module.exports = {
     "@vercel/style-guide/eslint/typescript",
     "@vercel/style-guide/eslint/browser",
     "@vercel/style-guide/eslint/react",
-    "@vercel/style-guide/eslint/next",
     "eslint-config-turbo",
   ].map(require.resolve),
   parserOptions: {
@@ -38,5 +37,20 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "import/no-unresolved": "off",
+    "unicorn/filename-case": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/function-component-definition": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
   },
 };
