@@ -4,6 +4,12 @@
     "plugins": [{ "name": "next" }],
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "tailwind.config.js",
+    "../../packages/ui/styles/button.css.ts"
+  ],
   "exclude": ["node_modules"]
 }

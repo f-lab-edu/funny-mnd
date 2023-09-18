@@ -4,7 +4,7 @@ import type {
   ElementType,
   PropsWithChildren,
 } from "react";
-import { typographyStyle } from "@/styles/components/typography.css";
+import { typographyStyle } from "./styles/typography.css";
 
 export type Combine<T, K> = T & Omit<K, keyof T>;
 
@@ -15,7 +15,7 @@ export type CombineElementProps<T extends ElementType, K = unknown> = Combine<
 
 type OverridableProps<T extends ElementType, K = unknown> = {
   as?: T;
-  theme?: string;
+  theme?: keyof typeof typographyStyle;
 } & CombineElementProps<T, K>;
 
 type TextProps<T extends ElementType> = PropsWithChildren<OverridableProps<T>>;

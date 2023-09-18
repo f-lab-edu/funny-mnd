@@ -5,8 +5,8 @@ import {
   bgPrimaryStyle,
   bgRedStyle,
   bgYellowStyle,
-} from "../style.css";
-import colors from "../source/colors";
+} from "../../../apps/funny-mnd/styles/style.css";
+import colors from "../../../apps/funny-mnd/styles/source/colors";
 
 export const buttonRadiusStyle = style({
   borderRadius: "8px",

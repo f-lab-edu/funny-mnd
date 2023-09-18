@@ -1,4 +1,4 @@
-import { createTheme, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import colors from "../source/colors";
 
 export const layoutStyle = style({
@@ -16,4 +16,9 @@ export const headerStyle = style({
 
 export const wrapperStyle = style({
   padding: "8px 12px",
+});
+
+export const titleBoxStyle = style({
+  paddingTop: 20,
+  paddingBottom: 20,
 });
