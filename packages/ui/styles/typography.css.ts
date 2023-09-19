@@ -1,4 +1,31 @@
 import { style, styleVariants } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
+
+export const typographyRecipe = recipe({
+  variants: {
+    fontSize: {
+      micro: "12px",
+      small: "14px",
+      base: "16px",
+      large: "24px",
+      xlarge: "32px",
+    },
+    fontWeight: {
+      400: "normal",
+      700: "bold",
+      900: "bolder",
+    },
+    textAlign: {
+      left: "left",
+      center: "center",
+      right: "right",
+    },
+  },
+  defaultVariants: {
+    fontSize: "base",
+    fontWeight: 400,
+  },
+});
 
 const fontSize = {
   micro: "12px",
