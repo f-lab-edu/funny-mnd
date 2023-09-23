@@ -5,7 +5,7 @@ import { titleBoxStyle } from "@/styles/components/layout.css";
 import useRoute from "@/hooks/useRoute";
 
 const HomePage: NextPage = () => {
-  const { goPxTop100 } = useRoute();
+  const { goPxTop100: handleClickGoPxTop100 } = useRoute();
 
   return (
     <main>
@@ -15,7 +15,7 @@ const HomePage: NextPage = () => {
         </Typography>
       </header>
       <div className="space-y-2">
-        <Button onClick={goPxTop100} theme="widthFull primary">
+        <Button onClick={handleClickGoPxTop100} theme="widthFull primary">
           PX 인기 TOP 100
         </Button>
         <Button theme="widthFull primary">병사 할인 혜택 정보</Button>

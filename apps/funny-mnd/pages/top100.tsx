@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
-import { MND_API_KEY } from "config/key";
-import type { Product, PxItemTop100Data } from "@/types/index.type";
+import type { Product } from "@/types/index.type";
 import { ProductRowStyle } from "@/styles/components/product.css";
+import { pxPopularProductsInfoData } from "@/services/mnd.api";
 
 interface Top100PageProps {
   productList: Product[];
@@ -23,12 +23,9 @@ export default Top100Page;
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(
-      `https://openapi.mnd.go.kr/${MND_API_KEY}/json/DS_MND_PX_PARD_PRDT_INFO/1/1160/`
-    );
-    const data: PxItemTop100Data = await res.json();
+    const pxItemTop100Rows = await pxPopularProductsInfoData();
 
-    const uniqueProducts: Product[] = data.DS_MND_PX_PARD_PRDT_INFO.row.reduce(
+    const uniqueProducts: Product[] = pxItemTop100Rows.reduce(
       (acc: Product[], current: Product) => {
         if (!acc.some((product) => product.prdtnm === current.prdtnm)) {
           acc.push(current);
