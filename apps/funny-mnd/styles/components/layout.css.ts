@@ -16,6 +16,7 @@ export const headerStyle = style({
   position: "fixed",
   top: 0,
   width: "100%",
+  zIndex: 20,
 });
 
 export const wrapperStyle = style({

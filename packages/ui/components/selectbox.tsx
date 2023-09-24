@@ -14,10 +14,6 @@ interface SelectBoxProps {
   onClick: (item: string) => void;
 }
 
-interface SelectProps extends PropsWithChildren {
-  onClick: () => void;
-}
-
 export const SelectBox: React.FC<SelectBoxProps> = ({
   value,
   items,

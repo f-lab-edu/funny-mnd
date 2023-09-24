@@ -12,6 +12,13 @@ export const selectBoxInputStyle = style({
 
 export const selectBoxButtonStyle = style({
   display: "inline-flex",
+  height: 44,
+  border: `1px solid ${colors.blue[500]}`,
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingLeft: 8,
+  paddingRight: 8,
+  minWidth: 120,
 });
 
 export const selectBoxListStyle = style({
@@ -32,6 +39,6 @@ export const selectBoxItemStyle = style({
   padding: "10px 12px",
   borderRadius: 8,
   ":hover": {
-    backgroundColor: colors.gray[500],
+    backgroundColor: colors.gray[300],
   },
 });

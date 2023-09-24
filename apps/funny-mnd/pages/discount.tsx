@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { SelectBox, Typography } from "ui/components";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { discountInfoData } from "@/services/mnd.api";
 import type { Discount } from "@/types/index.type";
 import { discountWrapperStyle } from "@/styles/components/discount.css";
@@ -15,9 +15,15 @@ const DiscountPage: NextPage<DiscountProps> = ({
   locationList,
 }) => {
   const [location, setLocation] = useState(locationList[0]);
+  const refineDiscountList = useMemo(() => {
+    if (location === "전국") {
+      return discountList;
+    }
+    return discountList.filter(({ rgn }) => rgn.includes(location));
+  }, [discountList, location]);
 
   return (
-    <main>
+    <main className="space-y-2">
       <SelectBox
         items={locationList}
         onClick={(newLocation) => {
@@ -27,7 +33,7 @@ const DiscountPage: NextPage<DiscountProps> = ({
       />
 
       <div className="space-y-1">
-        {discountList.map((discount) => {
+        {refineDiscountList.map((discount) => {
           return <DiscountRow discount={discount} key={discount.instltnnm} />;
         })}
       </div>
@@ -49,6 +55,8 @@ export async function getStaticProps() {
         return arr;
       }, [] as string[])
       .sort();
+
+    locationList.unshift("전국");
 
     return {
       props: {
