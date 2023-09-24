@@ -4,7 +4,7 @@ import type {
   ElementType,
   PropsWithChildren,
 } from "react";
-import { typographyStyle } from "./styles/typography.css";
+import { typographyStyle } from "../styles/typography.css";
 
 export type Combine<T, K> = T & Omit<K, keyof T>;
 
@@ -20,7 +20,7 @@ type OverridableProps<T extends ElementType, K = unknown> = {
 
 type TextProps<T extends ElementType> = PropsWithChildren<OverridableProps<T>>;
 
-function Typography<T extends ElementType = "span">(
+function TargetComponent<T extends ElementType = "span">(
   { children, as, theme, ...props }: TextProps<T>,
   ref: React.Ref<never>
 ) {
@@ -35,4 +35,4 @@ function Typography<T extends ElementType = "span">(
   );
 }
 
-export default forwardRef(Typography) as typeof Typography;
+export const Typography = forwardRef(TargetComponent) as typeof TargetComponent;

@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import colors from "../source/colors";
+import colors from "ui/styles/source/colors";
 
 export const layoutStyle = style({
   minHeight: "100vh",

@@ -26,9 +26,6 @@ importers:
       '@vanilla-extract/css':
         specifier: ^1.13.0
         version: 1.13.0
-      '@vanilla-extract/dynamic':
-        specifier: ^2.0.3
-        version: 2.0.3
       '@vanilla-extract/recipes':
         specifier: ^0.5.0
         version: 0.5.0(@vanilla-extract/css@1.13.0)
@@ -1192,7 +1189,7 @@ packages:
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
-      tslib: 2.5.0
+      tslib: 2.6.2
     dev: true
 
   /@rushstack/eslint-patch@1.3.3:
@@ -1649,12 +1646,6 @@ packages:
       deepmerge: 4.3.1
       media-query-parser: 2.0.2
       outdent: 0.8.0
-
-  /@vanilla-extract/dynamic@2.0.3:
-    resolution: {integrity: sha512-Rglfw2gXAYiBzAQ4jgUG7rBgE2c88e/zcG27ZVoIqMHVq56wf2C1katGMm1yFMNBgzqM7oBNYzz4YOMzznydkg==}
-    dependencies:
-      '@vanilla-extract/private': 1.0.3
-    dev: false
 
   /@vanilla-extract/integration@6.2.2(@types/node@20.6.4):
     resolution: {integrity: sha512-gV3qPFjFap1+IrPeuFy+tEZOq7l7ifJf1ik/kluDWhPr1ffsFG9puq1/jjJ4rod1BIC79Q5ZWPNvBInHyxfCew==}
@@ -5422,7 +5413,7 @@ packages:
   /rxjs@7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
-      tslib: 2.5.0
+      tslib: 2.6.2
     dev: true
 
   /safe-array-concat@1.0.0:
@@ -5812,7 +5803,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
       '@pkgr/utils': 2.4.0
-      tslib: 2.5.0
+      tslib: 2.6.2
     dev: true
 
   /tapable@2.2.1:
@@ -5953,10 +5944,6 @@ packages:
 
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: true
-
-  /tslib@2.5.0:
-    resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: true
 
   /tslib@2.6.2:

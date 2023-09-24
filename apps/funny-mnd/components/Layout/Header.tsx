@@ -1,5 +1,5 @@
-import Typography from "ui/Typography";
 import { typographyStyle } from "ui/styles/typography.css";
+import { Typography } from "ui/components";
 import { headerStyle } from "@/styles/components/layout.css";
 import useRoute from "@/hooks/useRoute";
 

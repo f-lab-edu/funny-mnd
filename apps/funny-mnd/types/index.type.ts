@@ -17,6 +17,11 @@ export interface Product {
 }
 
 //* discountInfoData
+export interface DiscountInfoProps {
+  startIndex: number;
+  endIndex: number;
+}
+
 export interface DiscountInfoData {
   DS_MND_ENLSTMN_DCNT_BEF_INF: DiscountInfo;
 }

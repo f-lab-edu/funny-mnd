@@ -27,3 +27,11 @@ globalStyle(".space-y-2 > * + *", {
 globalStyle(".space-x-1 > * + *", {
   marginTop: "0.25rem",
 });
+
+globalStyle(".rotate-180", {
+  transform: "rotate(180deg)",
+});
+
+globalStyle(".invisible", {
+  visibility: "hidden",
+});

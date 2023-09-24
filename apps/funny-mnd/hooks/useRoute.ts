@@ -11,7 +11,11 @@ const useRoute = () => {
     router.push("/top100");
   };
 
-  return { goHome, goPxTop100 };
+  const goDiscount = () => {
+    router.push("/discount");
+  };
+
+  return { goHome, goPxTop100, goDiscount };
 };
 
 export default useRoute;

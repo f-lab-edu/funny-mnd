@@ -1,6 +1,5 @@
-import Typography from "ui/Typography";
-import Button from "ui/button";
 import type { NextPage } from "next";
+import { Button, Typography } from "ui/components";
 import { titleBoxStyle } from "@/styles/components/layout.css";
 import useRoute from "@/hooks/useRoute";
 
