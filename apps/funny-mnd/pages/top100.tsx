@@ -1,6 +1,10 @@
 import type { NextPage } from "next";
 import type { Product } from "@/types/index.type";
-import { ProductRowStyle } from "@/styles/components/product.css";
+import {
+  ProductIndexStyle,
+  ProductNameStyle,
+  ProductRowStyle,
+} from "@/styles/components/product.css";
 import { pxPopularProductsInfoData } from "@/services/mnd.api";
 
 interface Top100PageProps {
@@ -10,7 +14,7 @@ interface Top100PageProps {
 const Top100Page: NextPage<Top100PageProps> = ({ productList }) => {
   return (
     <main>
-      <div>
+      <div className="space-y-1">
         {productList.map((row, index) => {
           return <ProductRow index={index} key={row.prdtnm} product={row} />;
         })}
@@ -59,14 +63,8 @@ interface ProductRowParam {
 const ProductRow: React.FC<ProductRowParam> = ({ index, product }) => {
   return (
     <div className={`${ProductRowStyle}`}>
-      <div
-        style={{
-          width: "40px",
-        }}
-      >
-        {index + 1}
-      </div>
-      <div>{product.prdtnm}</div>
+      <div className={ProductIndexStyle}>{index + 1}</div>
+      <div className={ProductNameStyle}>{product.prdtnm}</div>
     </div>
   );
 };
