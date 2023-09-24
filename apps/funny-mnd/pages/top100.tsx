@@ -41,9 +41,12 @@ export async function getStaticProps() {
       },
       revalidate: 5000,
     };
-  } catch {
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+    }
     return {
-      notfound: true,
+      notFound: true,
     };
   }
 }

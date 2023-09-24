@@ -52,6 +52,7 @@ module.exports = {
       {
         "checksVoidReturn": false
       }
-    ]
+    ],
+    "no-console": "off"
   },
 };
