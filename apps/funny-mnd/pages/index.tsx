@@ -7,6 +7,7 @@ const HomePage: NextPage = () => {
   const {
     goPxTop100: handleClickGoPxTop100,
     goDiscount: handleClickGoDiscount,
+    goRecreation: handleClickGoRecreation,
   } = useRoute();
 
   return (
@@ -23,7 +24,9 @@ const HomePage: NextPage = () => {
         <Button onClick={handleClickGoDiscount} theme="widthFull primary">
           병사 할인 혜택 정보
         </Button>
-        <Button theme="widthFull primary">군 휴양시설 정보 목록</Button>
+        <Button onClick={handleClickGoRecreation} theme="widthFull primary">
+          군 휴양시설 정보 목록
+        </Button>
         <Button theme="widthFull primary">군병원 정보</Button>
         <Button theme="widthFull primary">예비군 훈련장 정보</Button>
       </div>

@@ -82,12 +82,16 @@ interface DiscountRowProps {
 const DiscountRow: React.FC<DiscountRowProps> = ({ discount }) => {
   return (
     <div className={discountWrapperStyle}>
-      <Typography as="p">{discount.instltnnm}</Typography>
-      <a href={discount.hmpg} rel="noopener" target="_blank">
-        {discount.hmpg}
-      </a>
-      <Typography as="p">{discount.rgn}</Typography>
-      <Typography as="p">{discount.dcntenatvnm}</Typography>
+      <Typography as="h3">{discount.instltnnm}</Typography>
+      <div className="space-y-2">
+        <a href={discount.hmpg} rel="noopener" target="_blank">
+          {discount.hmpg}
+        </a>
+        <div>
+          <Typography as="p">위치: {discount.rgn}</Typography>
+          <Typography as="p">할인: {discount.dcntenatvnm}</Typography>
+        </div>
+      </div>
     </div>
   );
 };

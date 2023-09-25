@@ -41,10 +41,10 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
         <Typography className={selectBoxInputStyle}>{value}</Typography>
         <img
           className={`${isOpen ? "rotate-180" : ""}`}
-          src={"/images/btn_expand.svg"}
+          src={"/images/ic-dropdown.svg"}
           alt="Select Toggle"
-          width={12}
-          height={12}
+          width={20}
+          height={20}
           onClick={toggleSelectBox}
         />
       </button>
@@ -59,10 +59,10 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
             <Typography theme="base400">{item}</Typography>
             {value === item && (
               <img
-                src={"/images/ic-v2-done.png"}
+                src={"/images/ic-check.svg"}
                 alt="selected"
-                width={20}
-                height={20}
+                width={12}
+                height={12}
               />
             )}
           </button>
