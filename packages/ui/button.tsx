@@ -1,15 +1,19 @@
-"use client";
+import type { PropsWithChildren } from "react/index.js";
+import { buttonStyle } from "./styles/button.css";
 
-export function Button(): JSX.Element {
+interface ButtonParam
+  extends PropsWithChildren,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
+  theme: keyof typeof buttonStyle;
+}
+
+const Button: React.FC<ButtonParam> = ({ children, theme, ...props }) => {
+  const className = buttonStyle[theme];
   return (
-    <button
-      onClick={(): void => {
-        // eslint-disable-next-line no-alert -- alert is being used for demo purposes only
-        alert("booped");
-      }}
-      type="button"
-    >
-      Boop
+    <button className={className} type="button" {...props}>
+      {children}
     </button>
   );
-}
+};
+
+export default Button;

@@ -7,7 +7,11 @@ const useRoute = () => {
     router.push("/");
   };
 
-  return { goHome };
+  const goPxTop100 = () => {
+    router.push("/top100");
+  };
+
+  return { goHome, goPxTop100 };
 };
 
 export default useRoute;

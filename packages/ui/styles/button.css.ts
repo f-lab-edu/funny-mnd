@@ -5,8 +5,8 @@ import {
   bgPrimaryStyle,
   bgRedStyle,
   bgYellowStyle,
-} from "../style.css";
-import colors from "../source/colors";
+} from "../../../apps/funny-mnd/styles/style.css";
+import colors from "../../../apps/funny-mnd/styles/source/colors";
 
 export const buttonRadiusStyle = style({
   borderRadius: "8px",
@@ -80,7 +80,7 @@ export const bgYellowButtonStyle = style([
     ":hover": {
       backgroundColor: colors.yellow[300],
     },
-     ":active": {
+    ":active": {
       backgroundColor: colors.yellow[500],
     },
   },
@@ -100,9 +100,9 @@ const basic = {
 
 export const buttonStyle = styleVariants({
   ...basic,
-  "w-full primary": [...basic.primary, fullWidthStyle],
-  "w-full blue": [...basic.blue, fullWidthStyle],
-  "w-full gray": [...basic.gray, fullWidthStyle],
-  "w-full red": [...basic.red, fullWidthStyle],
-  "w-full yellow": [...basic.yellow, fullWidthStyle],
+  "widthFull primary": [...basic.primary, fullWidthStyle],
+  "widthFull blue": [...basic.blue, fullWidthStyle],
+  "widthFull gray": [...basic.gray, fullWidthStyle],
+  "widthFull red": [...basic.red, fullWidthStyle],
+  "widthFull yellow": [...basic.yellow, fullWidthStyle],
 });

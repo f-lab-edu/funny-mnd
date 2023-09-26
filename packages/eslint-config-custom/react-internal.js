@@ -1,5 +1,6 @@
 const { resolve } = require("node:path");
 
+
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /*
@@ -12,7 +13,7 @@ const project = resolve(process.cwd(), "tsconfig.json");
  *
  */
 
-module.exports = {
+export default {
   extends: [
     "@vercel/style-guide/eslint/browser",
     "@vercel/style-guide/eslint/typescript",

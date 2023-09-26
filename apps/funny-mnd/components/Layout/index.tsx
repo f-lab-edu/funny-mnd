@@ -1,8 +1,8 @@
-import { layoutStyle, wrapperStyle } from "@/styles/components/layout.css";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import Header from "./Header";
+import { layoutStyle, wrapperStyle } from "@/styles/components/layout.css";
 
-interface LayoutParam extends PropsWithChildren {}
+type LayoutParam = PropsWithChildren;
 
 const Layout: React.FC<LayoutParam> = ({ children }) => {
   return (
