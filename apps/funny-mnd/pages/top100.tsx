@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
-import { MND_API_KEY } from "config/key";
-import type { Product, PxItemTop100Data } from "@/types/index.type";
-import { ProductRowStyle } from "@/styles/components/product.css";
+import type { Product } from "@/types/index.type";
+import {
+  ProductIndexStyle,
+  ProductNameStyle,
+  ProductRowStyle,
+} from "@/styles/components/product.css";
+import { pxPopularProductsInfoData } from "@/services/mnd.api";
 
 interface Top100PageProps {
   productList: Product[];
@@ -10,7 +14,7 @@ interface Top100PageProps {
 const Top100Page: NextPage<Top100PageProps> = ({ productList }) => {
   return (
     <main>
-      <div>
+      <div className="space-y-1">
         {productList.map((row, index) => {
           return <ProductRow index={index} key={row.prdtnm} product={row} />;
         })}
@@ -23,12 +27,9 @@ export default Top100Page;
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(
-      `https://openapi.mnd.go.kr/${MND_API_KEY}/json/DS_MND_PX_PARD_PRDT_INFO/1/1160/`
-    );
-    const data: PxItemTop100Data = await res.json();
+    const pxItemTop100Rows = await pxPopularProductsInfoData();
 
-    const uniqueProducts: Product[] = data.DS_MND_PX_PARD_PRDT_INFO.row.reduce(
+    const uniqueProducts: Product[] = pxItemTop100Rows.reduce(
       (acc: Product[], current: Product) => {
         if (!acc.some((product) => product.prdtnm === current.prdtnm)) {
           acc.push(current);
@@ -44,9 +45,12 @@ export async function getStaticProps() {
       },
       revalidate: 5000,
     };
-  } catch {
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+    }
     return {
-      notfound: true,
+      notFound: true,
     };
   }
 }
@@ -59,14 +63,8 @@ interface ProductRowParam {
 const ProductRow: React.FC<ProductRowParam> = ({ index, product }) => {
   return (
     <div className={`${ProductRowStyle}`}>
-      <div
-        style={{
-          width: "40px",
-        }}
-      >
-        {index + 1}
-      </div>
-      <div>{product.prdtnm}</div>
+      <div className={ProductIndexStyle}>{index + 1}</div>
+      <div className={ProductNameStyle}>{product.prdtnm}</div>
     </div>
   );
 };
