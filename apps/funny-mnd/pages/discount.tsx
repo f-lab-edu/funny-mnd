@@ -25,13 +25,7 @@ const DiscountPage: NextPage<DiscountProps> = ({
 
   return (
     <main className="space-y-2">
-      <SelectBox
-        items={locationList}
-        onClick={(newLocation) => {
-          setLocation(newLocation);
-        }}
-        value={location}
-      />
+      <SelectBox items={locationList} onClick={setLocation} value={location} />
 
       <div className="space-y-1">
         {refineDiscountList.map((discount) => {
