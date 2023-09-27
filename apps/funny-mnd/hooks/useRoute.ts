@@ -19,6 +19,7 @@ const useRoute = () => {
     router.push("/recreation");
   };
 
+
   return { goHome, goPxTop100, goDiscount, goRecreation };
 };
 

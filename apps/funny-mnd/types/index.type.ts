@@ -1,4 +1,4 @@
-//* pxPopularProductsInfoData
+//* fetchPxPopularProductsInfoData
 export interface PxPopularProductsInfoData {
   DS_MND_PX_PARD_PRDT_INFO: ProductInfo;
 }
