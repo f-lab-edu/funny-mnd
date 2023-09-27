@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 import { useMemo, useState } from "react";
 import { SelectBox, Typography } from "ui/components";
-import { fetchRecreationInfoData } from "@/services/mnd.api";
+import { recreationInfoData } from "@/services/mnd.api";
 import type { Recreation } from "@/types/index.type";
-import getLocationList from "@/utils/getLocationList";
-import { RowLabel, RowWrapper } from "@/components/Row";
+import { recreationWrapperStyle } from "@/styles/components/recreation.css";
 
 interface RecreationPageProps {
   locationList: string[];
@@ -27,7 +26,13 @@ const RecreationPage: NextPage<RecreationPageProps> = ({
 
   return (
     <main className="space-y-2">
-      <SelectBox items={locationList} onClick={setLocation} value={location} />
+      <SelectBox
+        items={locationList}
+        onClick={(newLocation) => {
+          setLocation(newLocation);
+        }}
+        value={location}
+      />
       <div className="space-y-1">
         {refineRecreationList.map((recreation) => {
           return (
@@ -44,27 +49,28 @@ export default RecreationPage;
 
 export async function getStaticProps() {
   try {
-    const recreationList = await fetchRecreationInfoData();
+    const recreationList = await recreationInfoData();
 
-    const uniqueRecreationList = recreationList.reduce(
-      (arr: Recreation[], current) => {
-        if (
-          !arr.some(
-            (recreation) => recreation.instltn_nm === current.instltn_nm
-          )
-        ) {
-          return [...arr, current];
+    const uniqueRecreationList = recreationList.reduce((arr, current) => {
+      if (
+        !arr.some((recreation) => recreation.instltn_nm === current.instltn_nm)
+      ) {
+        return [...arr, current];
+      }
+      return arr;
+    }, [] as Recreation[]);
+
+    const locationList = recreationList
+      .reduce((arr, recreation) => {
+        const loc = recreation.pstn_addr.split(" ")[0];
+        if (Array.isArray(arr) && !arr.includes(loc)) {
+          return [...arr, loc];
         }
         return arr;
-      },
-      []
-    );
+      }, [] as string[])
+      .sort();
 
-    const locationList = getLocationList(
-      uniqueRecreationList.map(
-        (recreation) => recreation.pstn_addr.split(" ")[0]
-      )
-    );
+    locationList.unshift("전국");
 
     return {
       props: {
@@ -87,30 +93,19 @@ interface RecreationRowProps {
   recreation: Recreation;
 }
 
-const RecreationRow: React.FC<RecreationRowProps> = ({
-  recreation: {
-    instltn_nm: name,
-    hmpg_addr: homePageAddress,
-    pstn_addr: positionAddress,
-    sbsfcl,
-  },
-}) => {
+const RecreationRow: React.FC<RecreationRowProps> = ({ recreation }) => {
   return (
-    <RowWrapper>
-      <Typography as="h3">{name}</Typography>
+    <div className={recreationWrapperStyle}>
+      <Typography as="h3">{recreation.instltn_nm}</Typography>
       <div className="space-y-2">
-        <a href={homePageAddress} rel="noopener" target="_blank">
-          {homePageAddress}
+        <a href={recreation.hmpg_addr} rel="noopener" target="_blank">
+          {recreation.hmpg_addr}
         </a>
         <div>
-          <Typography as="p">
-            <RowLabel>위치</RowLabel>: {positionAddress}
-          </Typography>
-          <Typography as="p">
-            <RowLabel>시설</RowLabel>: {sbsfcl}
-          </Typography>
+          <Typography as="p">위치: {recreation.pstn_addr}</Typography>
+          <Typography as="p">시설: {recreation.sbsfcl}</Typography>
         </div>
       </div>
-    </RowWrapper>
+    </div>
   );
 };

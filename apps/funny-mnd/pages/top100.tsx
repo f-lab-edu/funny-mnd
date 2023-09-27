@@ -5,7 +5,7 @@ import {
   ProductNameStyle,
   ProductRowStyle,
 } from "@/styles/components/product.css";
-import { fetchPxPopularProductsInfoData } from "@/services/mnd.api";
+import { pxPopularProductsInfoData } from "@/services/mnd.api";
 
 interface Top100PageProps {
   productList: Product[];
@@ -27,7 +27,7 @@ export default Top100Page;
 
 export async function getStaticProps() {
   try {
-    const pxItemTop100Rows = await fetchPxPopularProductsInfoData();
+    const pxItemTop100Rows = await pxPopularProductsInfoData();
 
     const uniqueProducts: Product[] = pxItemTop100Rows.reduce(
       (acc: Product[], current: Product) => {
@@ -60,14 +60,11 @@ interface ProductRowParam {
   product: Product;
 }
 
-const ProductRow: React.FC<ProductRowParam> = ({
-  index,
-  product: { prdtnm },
-}) => {
+const ProductRow: React.FC<ProductRowParam> = ({ index, product }) => {
   return (
     <div className={`${ProductRowStyle}`}>
       <div className={ProductIndexStyle}>{index + 1}</div>
-      <div className={ProductNameStyle}>{prdtnm}</div>
+      <div className={ProductNameStyle}>{product.prdtnm}</div>
     </div>
   );
 };

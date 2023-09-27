@@ -1,12 +1,10 @@
 import { typographyStyle } from "ui/styles/typography.css";
 import { Typography } from "ui/components";
-import { useRouter } from "next/router";
 import { headerStyle } from "@/styles/components/layout.css";
-import { PATH } from "@/constants/page";
+import useRoute from "@/hooks/useRoute";
 
 const Header: React.FC = () => {
-  const router = useRouter();
-  const handleClickGoHome = () => router.push(PATH.HOME);
+  const { goHome: handleClickGoHome } = useRoute();
 
   return (
     <header className={headerStyle}>

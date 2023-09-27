@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 import { SelectBox, Typography } from "ui/components";
 import { useMemo, useState } from "react";
-import { fetchDiscountInfoData } from "@/services/mnd.api";
+import { discountInfoData } from "@/services/mnd.api";
 import type { Discount } from "@/types/index.type";
-import getLocationList from "@/utils/getLocationList";
-import { RowLabel, RowWrapper } from "@/components/Row";
+import { discountWrapperStyle } from "@/styles/components/discount.css";
 
 interface DiscountProps {
   discountList: Discount[];
@@ -25,7 +24,13 @@ const DiscountPage: NextPage<DiscountProps> = ({
 
   return (
     <main className="space-y-2">
-      <SelectBox items={locationList} onClick={setLocation} value={location} />
+      <SelectBox
+        items={locationList}
+        onClick={(newLocation) => {
+          setLocation(newLocation);
+        }}
+        value={location}
+      />
 
       <div className="space-y-1">
         {refineDiscountList.map((discount) => {
@@ -40,11 +45,18 @@ export default DiscountPage;
 
 export async function getStaticProps() {
   try {
-    const discountList = await fetchDiscountInfoData();
+    const discountList = await discountInfoData();
 
-    const locationList = getLocationList(
-      discountList.map((discount) => discount.rgn)
-    );
+    const locationList = discountList
+      .reduce((arr, discount) => {
+        if (Array.isArray(arr) && !arr.includes(discount.rgn)) {
+          return [...arr, discount.rgn];
+        }
+        return arr;
+      }, [] as string[])
+      .sort();
+
+    locationList.unshift("전국");
 
     return {
       props: {
@@ -67,25 +79,19 @@ interface DiscountRowProps {
   discount: Discount;
 }
 
-const DiscountRow: React.FC<DiscountRowProps> = ({
-  discount: { instltnnm, hmpg, rgn, dcntenatvnm },
-}) => {
+const DiscountRow: React.FC<DiscountRowProps> = ({ discount }) => {
   return (
-    <RowWrapper>
-      <Typography as="h3">{instltnnm}</Typography>
+    <div className={discountWrapperStyle}>
+      <Typography as="h3">{discount.instltnnm}</Typography>
       <div className="space-y-2">
-        <a href={hmpg} rel="noopener" target="_blank">
-          {hmpg}
+        <a href={discount.hmpg} rel="noopener" target="_blank">
+          {discount.hmpg}
         </a>
         <div>
-          <Typography as="p">
-            <RowLabel>위치</RowLabel>: {rgn}
-          </Typography>
-          <Typography as="p">
-            <RowLabel>할인</RowLabel>: {dcntenatvnm}
-          </Typography>
+          <Typography as="p">위치: {discount.rgn}</Typography>
+          <Typography as="p">할인: {discount.dcntenatvnm}</Typography>
         </div>
       </div>
-    </RowWrapper>
+    </div>
   );
 };
