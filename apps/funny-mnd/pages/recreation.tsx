@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import { useMemo, useState } from "react";
 import { SelectBox, Typography } from "ui/components";
-import { recreationInfoData } from "@/services/mnd.api";
+import { fetchRecreationInfoData } from "@/services/mnd.api";
 import type { Recreation } from "@/types/index.type";
-import { recreationWrapperStyle } from "@/styles/components/recreation.css";
+import getLocationList from "@/utils/getLocationList";
+import { RowLabel, RowWrapper } from "@/components/Row";
 
 interface RecreationPageProps {
   locationList: string[];
@@ -49,28 +50,27 @@ export default RecreationPage;
 
 export async function getStaticProps() {
   try {
-    const recreationList = await recreationInfoData();
+    const recreationList = await fetchRecreationInfoData();
 
-    const uniqueRecreationList = recreationList.reduce((arr, current) => {
-      if (
-        !arr.some((recreation) => recreation.instltn_nm === current.instltn_nm)
-      ) {
-        return [...arr, current];
-      }
-      return arr;
-    }, [] as Recreation[]);
-
-    const locationList = recreationList
-      .reduce((arr, recreation) => {
-        const loc = recreation.pstn_addr.split(" ")[0];
-        if (Array.isArray(arr) && !arr.includes(loc)) {
-          return [...arr, loc];
+    const uniqueRecreationList = recreationList.reduce(
+      (arr: Recreation[], current) => {
+        if (
+          !arr.some(
+            (recreation) => recreation.instltn_nm === current.instltn_nm
+          )
+        ) {
+          return [...arr, current];
         }
         return arr;
-      }, [] as string[])
-      .sort();
+      },
+      []
+    );
 
-    locationList.unshift("전국");
+    const locationList = getLocationList(
+      uniqueRecreationList.map(
+        (recreation) => recreation.pstn_addr.split(" ")[0]
+      )
+    );
 
     return {
       props: {
@@ -93,19 +93,30 @@ interface RecreationRowProps {
   recreation: Recreation;
 }
 
-const RecreationRow: React.FC<RecreationRowProps> = ({ recreation }) => {
+const RecreationRow: React.FC<RecreationRowProps> = ({
+  recreation: {
+    instltn_nm: name,
+    hmpg_addr: homePageAddress,
+    pstn_addr: positionAddress,
+    sbsfcl,
+  },
+}) => {
   return (
-    <div className={recreationWrapperStyle}>
-      <Typography as="h3">{recreation.instltn_nm}</Typography>
+    <RowWrapper>
+      <Typography as="h3">{name}</Typography>
       <div className="space-y-2">
-        <a href={recreation.hmpg_addr} rel="noopener" target="_blank">
-          {recreation.hmpg_addr}
+        <a href={homePageAddress} rel="noopener" target="_blank">
+          {homePageAddress}
         </a>
         <div>
-          <Typography as="p">위치: {recreation.pstn_addr}</Typography>
-          <Typography as="p">시설: {recreation.sbsfcl}</Typography>
+          <Typography as="p">
+            <RowLabel>위치</RowLabel>: {positionAddress}
+          </Typography>
+          <Typography as="p">
+            <RowLabel>시설</RowLabel>: {sbsfcl}
+          </Typography>
         </div>
       </div>
-    </div>
+    </RowWrapper>
   );
 };

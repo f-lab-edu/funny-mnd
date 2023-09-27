@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import { SelectBox, Typography } from "ui/components";
 import { useMemo, useState } from "react";
-import { discountInfoData } from "@/services/mnd.api";
+import { fetchDiscountInfoData } from "@/services/mnd.api";
 import type { Discount } from "@/types/index.type";
-import { discountWrapperStyle } from "@/styles/components/discount.css";
+import getLocationList from "@/utils/getLocationList";
+import { RowLabel, RowWrapper } from "@/components/Row";
 
 interface DiscountProps {
   discountList: Discount[];
@@ -45,18 +46,11 @@ export default DiscountPage;
 
 export async function getStaticProps() {
   try {
-    const discountList = await discountInfoData();
+    const discountList = await fetchDiscountInfoData();
 
-    const locationList = discountList
-      .reduce((arr, discount) => {
-        if (Array.isArray(arr) && !arr.includes(discount.rgn)) {
-          return [...arr, discount.rgn];
-        }
-        return arr;
-      }, [] as string[])
-      .sort();
-
-    locationList.unshift("전국");
+    const locationList = getLocationList(
+      discountList.map((discount) => discount.rgn)
+    );
 
     return {
       props: {
@@ -79,19 +73,25 @@ interface DiscountRowProps {
   discount: Discount;
 }
 
-const DiscountRow: React.FC<DiscountRowProps> = ({ discount }) => {
+const DiscountRow: React.FC<DiscountRowProps> = ({
+  discount: { instltnnm, hmpg, rgn, dcntenatvnm },
+}) => {
   return (
-    <div className={discountWrapperStyle}>
-      <Typography as="h3">{discount.instltnnm}</Typography>
+    <RowWrapper>
+      <Typography as="h3">{instltnnm}</Typography>
       <div className="space-y-2">
-        <a href={discount.hmpg} rel="noopener" target="_blank">
-          {discount.hmpg}
+        <a href={hmpg} rel="noopener" target="_blank">
+          {hmpg}
         </a>
         <div>
-          <Typography as="p">위치: {discount.rgn}</Typography>
-          <Typography as="p">할인: {discount.dcntenatvnm}</Typography>
+          <Typography as="p">
+            <RowLabel>위치</RowLabel>: {rgn}
+          </Typography>
+          <Typography as="p">
+            <RowLabel>할인</RowLabel>: {dcntenatvnm}
+          </Typography>
         </div>
       </div>
-    </div>
+    </RowWrapper>
   );
 };

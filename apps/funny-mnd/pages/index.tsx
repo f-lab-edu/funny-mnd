@@ -1,14 +1,16 @@
 import { Typography, Button } from "ui/components";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import { titleBoxStyle } from "@/styles/components/layout.css";
-import useRoute from "@/hooks/useRoute";
+import { PATH } from "@/constants/page";
 
 const HomePage: NextPage = () => {
-  const {
-    goPxTop100: handleClickGoPxTop100,
-    goDiscount: handleClickGoDiscount,
-    goRecreation: handleClickGoRecreation,
-  } = useRoute();
+  const router = useRouter();
+
+  const handleClickGoPxTop100 = () => router.push(PATH.PX_TOP_100);
+  const handleClickGoDiscount = () => router.push(PATH.DISCOUNT);
+  const handleClickGoRecreation = () => router.push(PATH.RECREATION);
+  const handleClickGoHospital = () => router.push(PATH.HOSPITAL);
 
   return (
     <main>
@@ -27,8 +29,9 @@ const HomePage: NextPage = () => {
         <Button onClick={handleClickGoRecreation} theme="widthFull primary">
           군 휴양시설 정보 목록
         </Button>
-        <Button theme="widthFull primary">군병원 정보</Button>
-        <Button theme="widthFull primary">예비군 훈련장 정보</Button>
+        <Button onClick={handleClickGoHospital} theme="widthFull primary">
+          군병원 정보
+        </Button>
       </div>
     </main>
   );
